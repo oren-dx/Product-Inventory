@@ -1,4 +1,4 @@
-# WADP-L4 Demonstration - 1-[Product Inventory]
+# WADP-L4 Demonstration-1 [Product Inventory]
 # 🛒 Django Product Inventory System
 
 A simple **Product Management Web Application** built with **Python and Django**.
