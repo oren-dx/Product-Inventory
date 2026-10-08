@@ -1,0 +1,134 @@
+{% extends 'master/base.html' %}
+
+{% block title %}
+Home - Product Inventory
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-4">Product Inventory</h1>
+
+
+<div class="search-box mb-4">
+
+<form method="GET">
+
+    <div class="col-md-4">
+
+        <input
+            type="text"
+            name="Search_items"
+            placeholder="Search by name, category or price"
+            value="{{ request.GET.Search_items }}"
+            class="form-control"
+        >
+
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+
+        <a href="{% url 'home_view' %}"class="btn btn-secondary my-2">Clear</a>
+
+    </div>
+
+</form>
+
+
+</div>
+
+
+
+<div class="row">
+
+{% for product in product_data %}
+
+<div class="col-md-4 col-lg-3 mb-4">
+
+    <div class="card h-100 shadow-sm">
+
+        {% if product.image %}
+
+            <img
+                src="{{ product.image.url }}"
+                alt="{{ product.name }}"
+                class="card-img-top"
+                style="height: 200px; object-fit: cover;"
+            >
+
+        {% else %}
+
+            <div
+                class="d-flex align-items-center justify-content-center"
+                style="height: 200px; background-color: #f1f1f1;"
+            >
+                No Image
+            </div>
+
+        {% endif %}
+
+
+        <!-- Card Body -->
+
+        <div class="card-body">
+
+            <h5 class="card-title">
+                {{ product.name }}
+            </h5>
+
+
+            <p class="card-text mb-1">
+                <strong>Category:</strong>
+                {{ product.category }}
+            </p>
+
+
+            <p class="card-text mb-1">
+                <strong>Price:</strong>
+                Tk. {{ product.price }}
+            </p>
+
+
+            <p class="card-text mb-1">
+                <strong>Quantity:</strong>
+                {{ product.qty }}
+            </p>
+
+
+            <p class="card-text">
+
+                <strong>Status:</strong>
+
+                {% if product.status == "Available" %}
+
+                    <span class="badge bg-success">
+                        {{ product.status }}
+                    </span>
+
+                {% else %}
+
+                    <span class="badge bg-danger">
+                        {{ product.status }}
+                    </span>
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% empty %}
+
+<div class="col-12">
+
+    <div class="alert alert-warning">No products found.</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2>Product Details</h2>
+
+    <div class="card mt-4">
+
+        <div class="card-body">
+
+            {% if product.image %}
+
+                <img src="{{ product.image.url }}" width="200" height="200" style="object-fit: cover;" class="mb-3">
+
+            {% endif %}
+
+
+            <h3>
+                {{ product.product_name }}
+            </h3>
+
+            <p>
+                <strong>Brand:</strong>
+                {{ product.brand }}
+            </p>
+
+            <p>
+                <strong>Price:</strong>
+                Tk. {{ product.price }}
+            </p>
+
+            <p>
+                <strong>Quantity:</strong>
+                {{ product.qty }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ product.status }}
+            </p>
+
+            <p>
+                <strong>Created At:</strong>
+                {{ product.created_at }}
+            </p>
+
+
+            <a href="{% url 'product_update' product.id %}" class="btn btn-warning">Edit</a>
+
+            <a href="{% url 'product_list' %}"class="btn btn-secondary">Back</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
